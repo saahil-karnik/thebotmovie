@@ -8,11 +8,11 @@ import logging
 from dotenv import load_dotenv
 import json
 from metrics import (
-    retrieve_context, generate_answer, extract_entities,  # Add extract_entities import
+    retrieve_context, generate_answer, extract_entities,
     context_precision, context_recall, context_relevance,
     context_entity_recall, noise_robustness, faithfulness,
     answer_relevance, information_integration, counterfactual_robustness,
-    negative_rejection, measure_latency
+    negative_rejection, measure_latency, format_recommendations, align_lengths
 )
 from sentence_transformers import SentenceTransformer
 
@@ -33,7 +33,7 @@ if not openai_api_key:
     raise ValueError("Please set the OPENAI_API_KEY environment variable.")
 
 try:
-    llm = OpenAI(api_key=openai_api_key, model_name="text-davinci-003")
+    llm = OpenAI(api_key=openai_api_key, model_name="gpt-4")
     embeddings = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
     logger.info("Successfully initialized LLM and embeddings.")
 except Exception as e:
@@ -72,6 +72,9 @@ try:
         logger.info(f"Type after conversion: {type(plot_embedding)}")  # Log the type after conversion
         logger.info(f"Embedding content: {plot_embedding}")  # Log the embedding content for debugging
 
+        # Convert the 'cast' list to a comma-separated string
+        movie['cast'] = ', '.join(movie['cast'])
+
         collection.add(ids=[str(idx)], embeddings=[plot_embedding], metadatas=[movie], documents=[text_to_embed])
     logger.info("Successfully added movie data to ChromaDB.")
 except Exception as e:
@@ -83,12 +86,34 @@ class UserQuery(BaseModel):
     query: str = None
 
 # Dummy ground truth and reference data for testing purposes
-relevant_contexts = ["Sample context 1 for query", "Sample context 2 for query"]  # Replace with actual ground truth
-reference_answers = ["Expected answer 1", "Expected answer 2"]
-counterfactual_queries = ["Counterfactual query 1", "Counterfactual query 2"]
-negative_queries = ["Negative query 1", "Negative query 2"]
+relevant_contexts = [
+    "Inception is a 2010 science fiction action film written and directed by Christopher Nolan, who also produced the film with Emma Thomas.",
+    "The Godfather is a 1972 American crime film directed by Francis Ford Coppola who co-wrote the screenplay with Mario Puzo.",
+    "Pulp Fiction is a 1994 American crime film written and directed by Quentin Tarantino, who conceived it with Roger Avary.",
+    "The Dark Knight is a 2008 superhero film directed, co-produced, and co-written by Christopher Nolan."
+]  # Replace with actual ground truth
 
-# FastAPI route to handle movie recommendations
+reference_answers = [
+    "Inception is a science fiction action film directed by Christopher Nolan.",
+    "The Godfather is a crime film directed by Francis Ford Coppola.",
+    "Pulp Fiction is a crime film written and directed by Quentin Tarantino.",
+    "The Dark Knight is a superhero film directed by Christopher Nolan."
+]
+
+counterfactual_queries = [
+    "Who directed The Godfather in 2020?",
+    "What is the plot of Pulp Fiction directed by Steven Spielberg?",
+    "In which year was Inception released by Martin Scorsese?",
+    "Who starred in The Dark Knight directed by Alfred Hitchcock?"
+]
+
+negative_queries = [
+    "Tell me about the plot of a non-existent movie.",
+    "What is the release date of the imaginary sequel to Inception?",
+    "Who are the actors in the made-up film 'Random Movie 2025'?",
+    "Describe the storyline of a fictional movie never produced."
+]
+
 @app.post("/movies/")
 async def get_movies(user_query: UserQuery):
     """
@@ -113,11 +138,14 @@ async def get_movies(user_query: UserQuery):
                 logger.info("No recommendations found.")
                 raise HTTPException(status_code=404, detail="No recommendations found")
 
+            # Ensure relevant_contexts has the same number of elements as recommendations
+            relevant_contexts_extended, _ = align_lengths(relevant_contexts, recommendations)
+
             # Calculate metrics
-            precision = context_precision(recommendations, relevant_contexts)
-            recall = context_recall(recommendations, relevant_contexts)
+            precision = context_precision(recommendations, relevant_contexts_extended)
+            recall = context_recall(recommendations, relevant_contexts_extended)
             relevance = context_relevance(recommendations, user_query.query)
-            entity_recall = context_entity_recall(recommendations, {"entity1", "entity2"})  # Placeholder
+            entity_recall = context_entity_recall(recommendations, {"Christopher Nolan", "Francis Ford Coppola", "Quentin Tarantino"})  # Placeholder
             noise_robustness_score = noise_robustness(recommendations, ["noisy query 1", "noisy query 2"])  # Placeholder
             generated_answers = [generate_answer(recommendations, user_query.query)]
             faithfulness_score = faithfulness(generated_answers, reference_answers)  # Placeholder
@@ -149,3 +177,8 @@ async def get_movies(user_query: UserQuery):
     except Exception as e:
         logger.error(f"Error during movie retrieval: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
+
+
+if __name__ == '__main__':
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
