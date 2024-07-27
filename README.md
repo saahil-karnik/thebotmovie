@@ -99,21 +99,24 @@ python metrics.py
 The system evaluates the performance of movie recommendations using the following metrics:
 
 Context Precision: Measures the accuracy of the retrieved context.
+
 Context Recall: Measures the ability to retrieve all relevant contexts.
-Context Relevance: Assesses the relevance of the retrieved context to the query.
-Context Entity Recall: Determines the ability to recall relevant entities within the context.
-Noise Robustness: Tests the system's ability to handle noisy or irrelevant inputs.
-Faithfulness: Measures the accuracy and reliability of the generated answers.
-Answer Relevance: Evaluates the relevance of the generated answers to the query.
-Information Integration: Assesses the ability to integrate and present information cohesively.
-Counterfactual Robustness: Tests the robustness of the system against counterfactual or contradictory queries.
-Negative Rejection: Measures the system's ability to reject and handle negative or inappropriate queries.
-Latency: Measures the response time from receiving a query to delivering an answer.
-Improvement Tips
-Enhance Data Quality: Ensure that the movie data in movie_data.json is accurate and comprehensive.
-Improve Entity Extraction: Fine-tune the Named Entity Recognition (NER) model to better identify entities within the movie data.
-Optimize Retrieval Algorithms: Experiment with different retrieval algorithms or embeddings to improve precision and recall.
-Increase Model Performance: Use more advanced language models and fine-tune them on a specific movie dataset.
+
+-Context Relevance: Assesses the relevance of the retrieved context to the query.
+-Context Entity Recall: Determines the ability to recall relevant entities within the context.
+-Noise Robustness: Tests the system's ability to handle noisy or irrelevant inputs.
+-Faithfulness: Measures the accuracy and reliability of the generated answers.
+-Answer Relevance: Evaluates the relevance of the generated answers to the query.
+-Information Integration: Assesses the ability to integrate and present information cohesively.
+-Counterfactual Robustness: Tests the robustness of the system against counterfactual or contradictory queries.
+-Negative Rejection: Measures the system's ability to reject and handle negative or inappropriate queries.
+-Latency: Measures the response time from receiving a query to delivering an answer.
+
+## Improvement Tips
+-Enhance Data Quality: Ensure that the movie data in movie_data.json is accurate and comprehensive.
+-Improve Entity Extraction: Fine-tune the Named Entity Recognition (NER) model to better identify entities within the movie data.
+-Optimize Retrieval Algorithms: Experiment with different retrieval algorithms or embeddings to improve precision and recall.
+-Increase Model Performance: Use more advanced language models and fine-tune them on a specific movie dataset.
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your changes. For major changes, please open an issue first to discuss what you would like to change.
