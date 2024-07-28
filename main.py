@@ -34,7 +34,7 @@ if not openai_api_key:
 
 try:
     llm = OpenAI(api_key=openai_api_key, model_name="gpt-4")
-    embeddings = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+    embeddings = SentenceTransformer('sentence-transformers/all-MiniLM-L12-v2')
     logger.info("Successfully initialized LLM and embeddings.")
 except Exception as e:
     logger.error(f"Error initializing LLM or embeddings: {e}")
