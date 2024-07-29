@@ -4,6 +4,8 @@ from sentence_transformers import SentenceTransformer, losses
 from torch.utils.data import DataLoader
 from evaluate import load
 import logging
+import re
+from transformers import pipeline
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -13,7 +15,10 @@ logger = logging.getLogger(__name__)
 rouge = load("rouge")
 
 # Load the pre-trained model
-model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+model = SentenceTransformer('sentence-transformers/all-MiniLM-L12-v2')
+
+# Load the NER pipeline
+ner_pipeline = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", aggregation_strategy="simple")
 
 # Sample functions to retrieve context and generate answers
 def retrieve_context(query, collection, n_results=3):
@@ -26,9 +31,12 @@ def generate_answer(contexts, query):
     answer = "Generated answer based on contexts and query"
     return answer
 
-# Placeholder function to extract entities from a given context
+# Function to extract entities from a given context string
 def extract_entities(context):
-    return ["entity1", "entity2"]
+    entities = ner_pipeline(context)
+    logger.info(f"Extracted entities: {entities}")
+    entity_list = [entity['word'] for entity in entities if 'entity_group' in entity and entity['entity_group'] in ['PER', 'ORG', 'LOC']]
+    return entity_list
 
 def format_recommendations(recommendations):
     formatted = []
@@ -77,7 +85,15 @@ def context_relevance(retrieved_contexts, query):
     return relevance
 
 def context_entity_recall(retrieved_contexts, relevant_entities):
-    retrieved_entities = set(entity for context in retrieved_contexts for entity in extract_entities(context))
+    retrieved_entities = set()
+    for context in retrieved_contexts:
+        if isinstance(context, dict):
+            # Extract entities from relevant fields of the context dictionary
+            for field in ["title", "plot", "cast"]:
+                if field in context:
+                    retrieved_entities.update(extract_entities(context[field]))
+        else:
+            retrieved_entities.update(extract_entities(context))
     recall = len(retrieved_entities.intersection(relevant_entities)) / len(relevant_entities) if relevant_entities else 0
     return recall
 
@@ -177,3 +193,4 @@ if __name__ == "__main__":
     print(f"Counterfactual Robustness: {counterfactual_robustness_score}")
     print(f"Negative Rejection: {negative_rejection_score}")
     print(f"Average Latency: {np.mean([latency[0] for latency in latencies])} seconds")
+1   
