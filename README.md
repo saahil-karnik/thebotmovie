@@ -56,6 +56,15 @@ To start the FastAPI server, run:
 uvicorn main:app --reload
 The API will be accessible at http://127.0.0.1:8000.
 
+### Run the metrics file
+python metrics.py
+
+### FineTuning
+python finetune.py
+
+### start the frontend
+streamlit run app.py
+
 API Endpoints
 POST /movies/: Retrieve movie recommendations based on a user query.
 Example Request
@@ -90,10 +99,7 @@ Example Response
         "Latency": 0.574
     }
 }
-Running Metrics Evaluation
-To run the metrics evaluation script, use:
 
-python metrics.py
 
 ## Metrics
 The system evaluates the performance of movie recommendations using the following metrics:
