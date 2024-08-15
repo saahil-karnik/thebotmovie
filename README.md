@@ -2,6 +2,9 @@
 
 This project is a movie recommendation system that retrieves relevant movie data based on user queries and evaluates the performance of the recommendations using various metrics. The system leverages ChromaDB for storing and querying movie data and utilizes pre-trained language models for natural language processing tasks.
 
+# youtube link.
+[https://youtu.be/nvjtSLknYCs](https://www.youtube.com/watch?v=53bpGNaD5mk)
+
 ## Introduction
 
 This project provides a REST API for retrieving movie recommendations based on user queries. It also evaluates the performance of the recommendations using metrics such as context precision, context recall, context relevance, and more. The project uses FastAPI for the API, ChromaDB for database management, and various NLP models for processing queries and calculating metrics.
@@ -101,34 +104,30 @@ Example Response
 }
 
 
-## Metrics
-The system evaluates the performance of movie recommendations using the following metrics:
+## Explainging Code file.
 
-Context Precision: Measures the accuracy of the retrieved context.
+Here’s a brief explanation of each of the code files you provided:
 
-Context Recall: Measures the ability to retrieve all relevant contexts.
+### app.py:
+This file is likely the main application script for deploying the movie recommendation system. It probably contains the code to start the server, handle HTTP requests, and interact with the recommendation model to serve movie suggestions and information to users. It could be using a web framework like Flask or FastAPI to handle these interactions.
 
--Context Relevance: Assesses the relevance of the retrieved context to the query.
--Context Entity Recall: Determines the ability to recall relevant entities within the context.
--Noise Robustness: Tests the system's ability to handle noisy or irrelevant inputs.
--Faithfulness: Measures the accuracy and reliability of the generated answers.
--Answer Relevance: Evaluates the relevance of the generated answers to the query.
--Information Integration: Assesses the ability to integrate and present information cohesively.
--Counterfactual Robustness: Tests the robustness of the system against counterfactual or contradictory queries.
--Negative Rejection: Measures the system's ability to reject and handle negative or inappropriate queries.
--Latency: Measures the response time from receiving a query to delivering an answer.
+### finetune.py:
+This script is responsible for fine-tuning the recommendation model. Fine-tuning involves further training a pre-existing model on additional data or tweaking it to improve its accuracy. This script likely loads the base model, prepares additional data, and adjusts the model's parameters to better fit the new data or target audience.
 
-## Improvement Tips
--Enhance Data Quality: Ensure that the movie data in movie_data.json is accurate and comprehensive.
--Improve Entity Extraction: Fine-tune the Named Entity Recognition (NER) model to better identify entities within the movie data.
--Optimize Retrieval Algorithms: Experiment with different retrieval algorithms or embeddings to improve precision and recall.
--Increase Model Performance: Use more advanced language models and fine-tune them on a specific movie dataset.
+### main.py:
+The main.py file appears to be the entry point for training the recommendation model from scratch or from a pre-trained state. It likely includes data loading, preprocessing, model definition, and the training loop. This script might be where the core machine learning or deep learning algorithm is implemented.
 
-## Contributing
-Contributions are welcome! Please fork the repository and submit a pull request with your changes. For major changes, please open an issue first to discuss what you would like to change.
+### metrics.py:
+The metrics.py script is used for evaluating the performance of the recommendation model. It likely calculates various metrics such as accuracy, precision, recall, or others relevant to recommendation systems. The script might compare the model’s predictions against a validation or test dataset to assess how well the model is performing.
 
-## License
-This project is licensed under the MIT License.
+### movie_data.json:
+This JSON file contains the dataset of movies, including details like titles, genres, plots, release dates, ratings, and cast members. This dataset is utilized by the model for making recommendations and is also displayed to users as part of the application’s information retrieval feature.
+
+## Contributing  
+Contributions are welcome! Please fork the repository and submit a pull request with your changes. For major changes, please open an issue first to discuss what you would like to change.  
+
+## License  
+This project is licensed under the MIT License.  
 
 # youtube link.
 [https://youtu.be/nvjtSLknYCs](https://www.youtube.com/watch?v=53bpGNaD5mk)
