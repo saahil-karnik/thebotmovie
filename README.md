@@ -6,9 +6,9 @@ This project is a movie recommendation system that retrieves relevant movie data
 [https://youtu.be/nvjtSLknYCs](https://www.youtube.com/watch?v=53bpGNaD5mk)
 
 # Group Project
-Rajan Panchal - 002626533 - https://www.linkedin.com/in/randomrajan/
-Saahil Karnik -   - https://www.linkedin.com/in/saahil-karnik-84a029165/ 
-Niruthiha - 
+Rajan Panchal - 002626533 - https://www.linkedin.com/in/randomrajan/  
+Saahil Karnik -   - https://www.linkedin.com/in/saahil-karnik-84a029165/   
+Niruthiha -   
 
 ## Introduction
 
