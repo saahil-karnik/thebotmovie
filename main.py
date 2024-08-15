@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from langchain_openai import OpenAI
+from langchain import OpenAI
 from chromadb import Client
 from chromadb.config import Settings
 import logging

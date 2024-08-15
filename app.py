@@ -40,7 +40,12 @@ if st.button("Filming it!"):
                 st.write(f"**Vote Count:** {movie['vote_count']}")
                 st.write(f"**Popularity:** {movie['popularity']}")
                 st.write(f"**Cast:** {movie['cast']}")
-                st.write(f"**Trailer Link:** [Watch Trailer]({movie['trailer_link']})")
+                
+                # Embed the YouTube video trailer if available
+                trailer_link = movie.get('trailer_link')
+                if trailer_link and ("youtube.com" in trailer_link or "youtu.be" in trailer_link):
+                    st.video(trailer_link)  # Embed the YouTube video directly
+
                 st.write("-" * 40)
 
             st.write("Metrics:")

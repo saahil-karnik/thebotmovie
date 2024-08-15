@@ -1,0 +1,52 @@
+[
+    {
+        "user_input": "I'm looking for a great action movie",
+        "movie_details": "A list of popular action movies",
+        "response": "You might enjoy 'Mad Max: Fury Road' or 'John Wick'."
+    },
+    {
+        "user_input": "Can you recommend a good sci-fi film?",
+        "movie_details": "A list of popular sci-fi movies",
+        "response": "How about 'Inception' or 'Blade Runner 2049'?"
+    },
+    {
+        "user_input": "I want to watch a classic drama",
+        "movie_details": "A list of classic drama films",
+        "response": "I recommend 'The Shawshank Redemption' or 'Forrest Gump'."
+    },
+    {
+        "user_input": "Any suggestions for a comedy movie?",
+        "movie_details": "A list of popular comedy movies",
+        "response": "You might like 'Superbad' or 'Step Brothers'."
+    },
+    {
+        "user_input": "What’s a good family movie?",
+        "movie_details": "A list of popular family-friendly movies",
+        "response": "Try 'The Lion King' or 'Finding Nemo'."
+    },
+    {
+        "user_input": "I want a movie with a strong female lead",
+        "movie_details": "Movies featuring strong female protagonists",
+        "response": "Consider 'Wonder Woman' or 'Mad Max: Fury Road'."
+    },
+    {
+        "user_input": "Looking for a recent thriller",
+        "movie_details": "Recent thriller movies",
+        "response": "How about 'A Quiet Place' or 'Gone Girl'?"
+    },
+    {
+        "user_input": "Recommend a romantic movie",
+        "movie_details": "Popular romantic movies",
+        "response": "I suggest 'The Notebook' or 'La La Land'."
+    },
+    {
+        "user_input": "Any good documentaries?",
+        "movie_details": "Popular documentaries",
+        "response": "Check out '13th' or 'Free Solo'."
+    },
+    {
+        "user_input": "What’s a good film for a weekend binge?",
+        "movie_details": "Movies suitable for a weekend binge",
+        "response": "Try 'Stranger Things' (series) or 'The Godfather' (film series)."
+    }
+]
