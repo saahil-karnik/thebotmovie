@@ -15,6 +15,7 @@ from metrics import (
     negative_rejection, measure_latency, format_recommendations, align_lengths
 )
 from sentence_transformers import SentenceTransformer
+from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, confusion_matrix, matthews_corrcoef
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -172,15 +173,13 @@ async def get_movies(user_query: UserQuery):
         logger.error(f"Error during movie retrieval: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-from sklearn.metrics import precision_score, recall_score, f1_score
-
 def evaluate_recommendations(predictions, ground_truths):
     """
-    Evaluate the recommendations based on precision, recall, and F1 score.
+    Evaluate the recommendations based on various metrics such as precision, recall, F1 score, accuracy, specificity, and MCC.
     
     :param predictions: List of recommended movie lists for each query.
     :param ground_truths: List of ground truth relevant movies for each query.
-    :return: Dictionary containing precision, recall, and F1 score.
+    :return: Dictionary containing various evaluation metrics.
     """
     y_true = []
     y_pred = []
@@ -199,20 +198,29 @@ def evaluate_recommendations(predictions, ground_truths):
             if movie not in pred_set:
                 y_pred.append(0)  # Not predicted
                 y_true.append(1)  # Actually relevant
-    
+
     # Ensure consistent lengths
     if len(y_true) != len(y_pred):
         raise ValueError(f"Length mismatch: y_true ({len(y_true)}) vs y_pred ({len(y_pred)})")
 
     # Compute metrics
-    precision = precision_score(y_true, y_pred, average='binary')  # Use 'binary' or 'micro' depending on your use case
+    precision = precision_score(y_true, y_pred, average='binary')
     recall = recall_score(y_true, y_pred, average='binary')
     f1 = f1_score(y_true, y_pred, average='binary')
+    accuracy = accuracy_score(y_true, y_pred)
+    mcc = matthews_corrcoef(y_true, y_pred)
+
+    # Compute specificity (true negative rate)
+    tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
 
     return {
         "Precision": precision,
         "Recall": recall,
-        "F1 Score": f1
+        "F1 Score": f1,
+        "Accuracy": accuracy,
+        "Specificity": specificity,
+        "MCC": mcc
     }
 
 # Example usage:
@@ -221,4 +229,3 @@ ground_truths = [["Inception"], ["The Godfather", "The Godfather II"], ["Pulp Fi
 
 metrics = evaluate_recommendations(predictions, ground_truths)
 print(metrics)
-
