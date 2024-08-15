@@ -7,8 +7,8 @@ This project is a movie recommendation system that retrieves relevant movie data
 
 # Group Project
 Rajan Panchal - 002626533 - https://www.linkedin.com/in/randomrajan/  
-Saahil Karnik -   - https://www.linkedin.com/in/saahil-karnik-84a029165/   
-Niruthiha -   
+Saahil Karnik - 002209455  - https://www.linkedin.com/in/saahil-karnik-84a029165/   
+  
 
 ## Introduction
 
