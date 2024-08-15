@@ -1,4 +1,4 @@
-# Movie Recommendation System with Metrics Evaluation
+# Movie Recommendation System with Metrics Evaluation and Fine Tuning
 
 This project is a movie recommendation system that retrieves relevant movie data based on user queries and evaluates the performance of the recommendations using various metrics. The system leverages ChromaDB for storing and querying movie data and utilizes pre-trained language models for natural language processing tasks.
 
@@ -125,4 +125,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 This project is licensed under the MIT License.
 
 # youtube link.
-https://youtu.be/nvjtSLknYCs
+[https://youtu.be/nvjtSLknYCs](https://www.youtube.com/watch?v=53bpGNaD5mk)
