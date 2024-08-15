@@ -5,6 +5,11 @@ This project is a movie recommendation system that retrieves relevant movie data
 # youtube link.
 [https://youtu.be/nvjtSLknYCs](https://www.youtube.com/watch?v=53bpGNaD5mk)
 
+# Group Project
+Rajan Panchal - 002626533 - https://www.linkedin.com/in/randomrajan/
+Saahil Karnik -   - https://www.linkedin.com/in/saahil-karnik-84a029165/ 
+Niruthiha - 
+
 ## Introduction
 
 This project provides a REST API for retrieving movie recommendations based on user queries. It also evaluates the performance of the recommendations using metrics such as context precision, context recall, context relevance, and more. The project uses FastAPI for the API, ChromaDB for database management, and various NLP models for processing queries and calculating metrics.
