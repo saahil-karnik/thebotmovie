@@ -7,8 +7,8 @@ This project is a movie recommendation system that retrieves relevant movie data
 
 # Group Project
 Rajan Panchal - 002626533 - https://www.linkedin.com/in/randomrajan/  
-Saahil Karnik -   - https://www.linkedin.com/in/saahil-karnik-84a029165/   
-Niruthiha -   
+Saahil Karnik - 002209455- https://www.linkedin.com/in/saahil-karnik-84a029165/   
+Niruthiha Selvanayagam - 002413183 - https://www.linkedin.com/in/niruthi-selva/?originalSubdomain=ca
 
 ## Introduction
 
@@ -133,6 +133,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 ## License  
 This project is licensed under the MIT License.  
-
-# youtube link.
-[https://youtu.be/nvjtSLknYCs](https://www.youtube.com/watch?v=53bpGNaD5mk)
+)
