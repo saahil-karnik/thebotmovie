@@ -2,7 +2,7 @@
 
 This project is a movie recommendation system that retrieves relevant movie data based on user queries and evaluates the performance of the recommendations using various metrics. The system leverages ChromaDB for storing and querying movie data and utilizes pre-trained language models for natural language processing tasks.
 
-# youtube link.
+# Youtube link-
 [https://youtu.be/nvjtSLknYCs](https://www.youtube.com/watch?v=53bpGNaD5mk)
 
 # Group Project
@@ -134,5 +134,5 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 ## License  
 This project is licensed under the MIT License.  
 
-# youtube link.
+# Youtube link-
 [https://youtu.be/nvjtSLknYCs](https://www.youtube.com/watch?v=53bpGNaD5mk)
